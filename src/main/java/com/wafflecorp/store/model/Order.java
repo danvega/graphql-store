@@ -1,27 +1,31 @@
 package com.wafflecorp.store.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "orders")
 public class Order {
 
+    @Id
+    @GeneratedValue
     private Integer id;
-    private Product product;
     private Integer qty;
-    private Customer customer;
     private LocalDate orderedOn;
     private OrderStatus status;
+    @ManyToOne
+    private Product product;
+    @ManyToOne
+    private Customer customer;
 
-    public Order() {
+    public Order() {}
 
-    }
-
-    public Order(Integer oid, Product product, Integer qty, Customer customer, LocalDate orderedOn, OrderStatus status) {
-        this.id = oid;
-        this.product = product;
+    public Order(Integer qty, LocalDate orderedOn, OrderStatus status, Product product, Customer customer) {
         this.qty = qty;
-        this.customer = customer;
         this.orderedOn = orderedOn;
         this.status = status;
+        this.product = product;
+        this.customer = customer;
     }
 
     public Integer getId() {
@@ -32,28 +36,12 @@ public class Order {
         this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     public Integer getQty() {
         return qty;
     }
 
     public void setQty(Integer qty) {
         this.qty = qty;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 
     public LocalDate getOrderedOn() {
@@ -72,15 +60,31 @@ public class Order {
         this.status = status;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
-                "oid=" + id +
-                ", product=" + product +
+                "id=" + id +
                 ", qty=" + qty +
-                ", customer=" + customer +
                 ", orderedOn=" + orderedOn +
                 ", status=" + status +
+                ", product=" + product +
+                ", customer=" + customer +
                 '}';
     }
 }

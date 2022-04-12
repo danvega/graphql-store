@@ -5,10 +5,9 @@ import com.wafflecorp.store.repository.ProductRepository;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
-import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ProductController {
@@ -19,14 +18,15 @@ public class ProductController {
         this.repository = repository;
     }
 
-    @SchemaMapping(typeName = "Query", value = "allProducts")
-    public List<Product> findAllProducts() {
+    @QueryMapping
+    public Iterable<Product> allProducts() {
         return repository.findAll();
     }
 
     @QueryMapping
     public Product getProduct(@Argument Integer id) {
-        return repository.findOne(id);
+        Optional<Product> product = repository.findById(id);
+        return product.isPresent() ? product.get() : null;
     }
 
     @MutationMapping
@@ -40,8 +40,8 @@ public class ProductController {
     }
 
     @MutationMapping
-    public Boolean deleteProduct(@Argument Integer id) {
-        return repository.delete(id);
+    public void deleteProduct(@Argument Integer id) {
+        repository.deleteById(id);
     }
 
 }

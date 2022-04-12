@@ -3,33 +3,54 @@ package com.wafflecorp.store.controller;
 import com.wafflecorp.store.config.GraphQlConfig;
 import com.wafflecorp.store.model.Product;
 import com.wafflecorp.store.repository.ProductRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.graphql.test.tester.GraphQlTester;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
 
-@SuppressWarnings("ALL")
 @GraphQlTest(ProductController.class)
-@Import({GraphQlConfig.class, ProductRepository.class})
+@Import({GraphQlConfig.class})
 class ProductControllerTest {
 
     @Autowired
     private GraphQlTester graphQlTester;
 
+    @MockBean
+    private ProductRepository productRepository;
+
+    private List<Product> products = new ArrayList<>();
+
     @Test
     public void contextLoads() {
         assertNotNull(graphQlTester);
+        assertNotNull(productRepository);
+    }
+
+    @BeforeEach
+    void setUp() {
+        var classic = new Product(1,"Classic Waffle", "Classic Sweet Cream Waffle");
+        var pecan = new Product(2,"Pecan Waffle", "Sweet Cream Waffle made with delicious Pecan Pieces");
+        var chocolateChip = new Product(3,"Chocolate Chip Waffle", "Sweet Cream Waffle covered in Chocolate Chips");
+        var peanutButter = new Product(4,"Peanut Butter Chip Waffle", "Sweet Cream Waffle covered in Peanut Butter Chips");
+        products.addAll(List.of(classic,pecan,chocolateChip,peanutButter));
     }
 
     @Test
-    void testGetAllProductsQueryReturnsOneProduct() {
+    void testGetAllProductsQueryReturnsAllProducts() {
         String document = """
             query {
               allProducts {
@@ -40,15 +61,17 @@ class ProductControllerTest {
             }   
         """;
 
+        when(productRepository.findAll()).thenReturn(products);
+
         graphQlTester.document(document)
                 .execute()
                 .path("allProducts")
                 .entityList(Product.class)
-                .hasSizeGreaterThan(0);
+                .hasSize(4);
     }
 
     @Test
-    void testGetProductReturnsCorrectProduct() {
+    void testGetProductReturnsProduct() {
         String document = """
             query findProduct($id:ID) {
               getProduct(id:$id) {
@@ -59,39 +82,17 @@ class ProductControllerTest {
             } 
         """;
 
+        when(productRepository.findById(1)).thenReturn(java.util.Optional.ofNullable(products.get(0)));
+
         graphQlTester.document(document)
                 .variable("id",1)
                 .execute()
                 .path("getProduct")
                 .entity(Product.class)
-                .satisfies(product -> product.getTitle().equals("Yummy \uD83D\uDE0B Waffles"));
-    }
-
-    @Test
-    void testGetProductMatchesExpectedJSON() {
-        String document = """
-        query findProduct($id:ID) {
-          getProduct(id:$id) {
-            id
-            title
-            desc
-          }
-        } 
-        """;
-
-        String expected = """
-        {
-            "id": "1",
-            "title": "Yummy 😋 Waffles",
-            "desc": "These are the best waffles ever!"
-        }
-        """;
-
-        graphQlTester.document(document)
-                .variable("id",1)
-                .execute()
-                .path("getProduct")
-                .matchesJson(expected);
+                .satisfies(product -> {
+                    assertEquals("Classic Waffle",product.getTitle());
+                    assertEquals("Classic Sweet Cream Waffle",product.getDesc());
+                });
     }
 
     @Test
@@ -105,10 +106,14 @@ class ProductControllerTest {
               }
             }
         """;
+
+        Product strawberry = new Product(5,"Strawberry Waffles","Our Classic Waffle topped with Strawberries.");
         Map<String,Object> input = new HashMap<>();
-        input.put("id",null);
-        input.put("title", "My New Product Title");
-        input.put("desc", "My new desc!");
+        input.put("id",strawberry.getId());
+        input.put("title", strawberry.getTitle());
+        input.put("desc", strawberry.getDesc());
+
+        when(productRepository.save(ArgumentMatchers.any())).thenReturn(strawberry);
 
         graphQlTester.document(document)
                 .variable("input", input)
@@ -117,8 +122,8 @@ class ProductControllerTest {
                 .entity(Product.class)
                 .satisfies(product -> {
                     assertNotNull(product.getId());
-                    assertEquals("My New Product Title",product.getTitle());
-                    assertEquals("My new desc!", product.getDesc());
+                    assertEquals("Strawberry Waffles",product.getTitle());
+                    assertEquals("Our Classic Waffle topped with Strawberries.", product.getDesc());
                 });
     }
 
@@ -133,10 +138,14 @@ class ProductControllerTest {
               }
             }
         """;
+
+        Product strawberry = new Product(5,"Strawberry Waffle","Our Classic Waffle topped with Strawberries.");
         Map<String,Object> input = new HashMap<>();
-        input.put("id",1);
-        input.put("title", "Yummy 😋 Waffles");
-        input.put("desc", "Voted America's #1 Waffle!");
+        input.put("id",strawberry.getId());
+        input.put("title", strawberry.getTitle());
+        input.put("desc", strawberry.getDesc());
+
+        when(productRepository.save(ArgumentMatchers.any())).thenReturn(strawberry);
 
         graphQlTester.document(document)
                 .variable("input", input)
@@ -144,9 +153,9 @@ class ProductControllerTest {
                 .path("updateProduct")
                 .entity(Product.class)
                 .satisfies(product -> {
-                    assertEquals(1,product.getId());
-                    assertEquals("Yummy 😋 Waffles",product.getTitle());
-                    assertEquals("Voted America's #1 Waffle!", product.getDesc());
+                    assertNotNull(product.getId());
+                    assertEquals("Strawberry Waffle",product.getTitle());
+                    assertEquals("Our Classic Waffle topped with Strawberries.", product.getDesc());
                 });
     }
 
@@ -158,9 +167,12 @@ class ProductControllerTest {
             }
         """;
 
+        Mockito.doNothing().when(productRepository).deleteById(1);
+
         graphQlTester.document(document)
                 .variable("id", 1)
                 .executeAndVerify();
+
     }
 
 }

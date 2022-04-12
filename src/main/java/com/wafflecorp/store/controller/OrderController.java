@@ -5,8 +5,6 @@ import com.wafflecorp.store.repository.OrderRepository;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
-import java.util.List;
-
 @Controller
 public class OrderController {
 
@@ -17,7 +15,8 @@ public class OrderController {
     }
 
     @QueryMapping
-    public List<Order> allOrders() {
+    public Iterable<Order> allOrders() {
         return repository.findAll();
     }
+
 }

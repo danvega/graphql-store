@@ -1,19 +1,27 @@
 package com.wafflecorp.store.model;
 
+import javax.persistence.*;
+
+@Entity
 public class Review {
 
+    @Id
+    @GeneratedValue
     private Integer id;
     private String content;
-    private Product product;
-    private Customer customer;
     private ReviewStatus status;
+    @ManyToOne
+    private Product product;
+    @ManyToOne
+    private Customer customer;
 
-    public Review(Integer id, String content, Product product, Customer customer, ReviewStatus status) {
-        this.id = id;
+    public Review() {}
+
+    public Review(String content, ReviewStatus status, Product product, Customer customer) {
         this.content = content;
+        this.status = status;
         this.product = product;
         this.customer = customer;
-        this.status = status;
     }
 
     public Integer getId() {
@@ -32,6 +40,14 @@ public class Review {
         this.content = content;
     }
 
+    public ReviewStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReviewStatus status) {
+        this.status = status;
+    }
+
     public Product getProduct() {
         return product;
     }
@@ -48,22 +64,14 @@ public class Review {
         this.customer = customer;
     }
 
-    public ReviewStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ReviewStatus status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
         return "Review{" +
                 "id=" + id +
                 ", content='" + content + '\'' +
+                ", status=" + status +
                 ", product=" + product +
                 ", customer=" + customer +
-                ", status=" + status +
                 '}';
     }
 }

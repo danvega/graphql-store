@@ -1,22 +1,22 @@
 package com.wafflecorp.store.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
 public class Customer {
 
+    @Id
+    @GeneratedValue
     private Integer id;
     private String firstName;
     private String lastName;
     private String email;
-    private Set<Order> orders = new HashSet<>();
 
-    public Customer() {
+    public Customer() {}
 
-    }
-
-    public Customer(Integer id, String firstName, String lastName, String email) {
-        this.id = id;
+    public Customer(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -52,14 +52,6 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
     }
 
     @Override

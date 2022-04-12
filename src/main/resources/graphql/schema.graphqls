@@ -12,12 +12,13 @@ type Query {
     allCustomers: [Customer]
     findCustomerByLastName(last: String) : Customer
     allReviews: [Review]
+    getReview(id: ID) : Review
 }
 
 type Mutation {
     createProduct(input: ProductInput) : Product
     updateProduct(input: ProductInput) : Product
-    deleteProduct(id: Int): Boolean!
+    deleteProduct(id: Int): Boolean
 }
 
 # Objects
