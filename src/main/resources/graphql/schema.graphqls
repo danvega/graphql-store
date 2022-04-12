@@ -1,0 +1,77 @@
+# Scalar Types
+scalar Date
+scalar DateTime
+
+# Root Operations
+type Query {
+    # List all products in the system
+    allProducts: [Product]
+    # Get a single product by the product id.
+    getProduct(id: ID): Product
+    allOrders: [Order]
+    allCustomers: [Customer]
+    findCustomerByLastName(last: String) : Customer
+    allReviews: [Review]
+}
+
+type Mutation {
+    createProduct(input: ProductInput) : Product
+    updateProduct(input: ProductInput) : Product
+    deleteProduct(id: Int): Boolean!
+}
+
+# Objects
+type Product {
+    id: ID!
+    title: String
+    desc: String
+}
+
+type Order {
+    id: ID!
+    product: Product
+    qty: Int
+    customer: Customer
+    orderedOn: Date
+    status: OrderStatus
+}
+
+enum OrderStatus {
+    CANCELED,
+    PENDING,
+    ORDERED,
+    SHIPPED,
+    DELIVERED
+}
+
+type Customer {
+    id: ID!
+    firstName: String
+    lastName: String
+    email: String
+    orders: [Order]
+}
+
+type Review {
+    id: ID!
+    content: String
+    product: Product!
+    customer: Customer!
+    status: ReviewStatus
+}
+
+enum ReviewStatus {
+    PENDING
+    APPROVED
+    DECLINED
+}
+
+# Inputs
+input ProductInput {
+    id: Int
+    title: String
+    desc: String
+}
+
+
+

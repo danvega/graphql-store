@@ -1,0 +1,47 @@
+package com.wafflecorp.store.controller;
+
+import com.wafflecorp.store.model.Product;
+import com.wafflecorp.store.repository.ProductRepository;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
+import org.springframework.stereotype.Controller;
+
+import java.util.List;
+
+@Controller
+public class ProductController {
+
+    private final ProductRepository repository;
+
+    public ProductController(ProductRepository repository) {
+        this.repository = repository;
+    }
+
+    @SchemaMapping(typeName = "Query", value = "allProducts")
+    public List<Product> findAllProducts() {
+        return repository.findAll();
+    }
+
+    @QueryMapping
+    public Product getProduct(@Argument Integer id) {
+        return repository.findOne(id);
+    }
+
+    @MutationMapping
+    public Product createProduct(@Argument Product input) {
+        return repository.save(input);
+    }
+
+    @MutationMapping
+    public Product updateProduct(@Argument Product input) {
+        return repository.save(input);
+    }
+
+    @MutationMapping
+    public Boolean deleteProduct(@Argument Integer id) {
+        return repository.delete(id);
+    }
+
+}
