@@ -23,8 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-@GraphQlTest(ProductController.class)
 @Import({GraphQlConfig.class})
+@GraphQlTest(ProductController.class)
 class ProductControllerTest {
 
     @Autowired
