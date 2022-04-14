@@ -10,6 +10,8 @@ type Query {
     getProduct(id: ID): Product
     # List all orders in the system.
     allOrders: [Order]
+    # Find an order by order id.
+    getOrder(id: ID) : Order
     # List all customers in the system.
     allCustomers: [Customer]
     # Find a customer by their last name.

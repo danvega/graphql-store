@@ -30,14 +30,15 @@ public class DatabaseInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Customer dan = new Customer("Dan","Vega","danvega@gmail.com");
-        customerRepository.save(dan);
 
         var classic = new Product("Classic Waffle", "Classic Sweet Cream Waffle");
         var pecan = new Product("Pecan Waffle", "Sweet Cream Waffle made with delicious Pecan Pieces");
         var chocolateChip = new Product("Chocolate Chip Waffle", "Sweet Cream Waffle covered in Chocolate Chips");
         var peanutButter = new Product("Peanut Butter Chip Waffle", "Sweet Cream Waffle covered in Peanut Butter Chips");
         productRepository.saveAll(List.of(classic,pecan,chocolateChip,peanutButter));
+
+        Customer dan = new Customer("Dan","Vega","danvega@gmail.com");
+        customerRepository.save(dan);
 
         Order one = new Order(1, LocalDate.now(), OrderStatus.PENDING,classic,dan);
         orderRepository.save(one);
