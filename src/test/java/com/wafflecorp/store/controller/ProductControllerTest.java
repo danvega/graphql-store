@@ -33,7 +33,7 @@ class ProductControllerTest {
     @MockBean
     private ProductRepository productRepository;
 
-    private List<Product> products = new ArrayList<>();
+    private final List<Product> products = new ArrayList<>();
 
     @Test
     public void contextLoads() {
