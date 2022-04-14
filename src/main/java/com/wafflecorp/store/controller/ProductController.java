@@ -7,6 +7,7 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Controller
@@ -24,9 +25,8 @@ public class ProductController {
     }
 
     @QueryMapping
-    public Product getProduct(@Argument Integer id) {
-        Optional<Product> product = repository.findById(id);
-        return product.isPresent() ? product.get() : null;
+    public Optional<Product> getProduct(@Argument Integer id) {
+        return repository.findById(id);
     }
 
     @MutationMapping
