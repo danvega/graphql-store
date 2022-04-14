@@ -18,3 +18,9 @@ GraphQL is a query language for APIs and a runtime for fulfilling those queries 
 
 In this session, you’ll learn what GraphQL is and why you should consider it in your next project. You’ll learn how to use GraphQL in your Spring Boot applications by leveraging the Spring for GraphQL project. By the end of this session, you’ll understand how to stand up a GraphQL endpoint and request the data you need, and nothing more.
 
+## Resources
+
+- [Learn GraphQL](https://graphql.org/learn/)
+- [Spring for GraphQL Project](https://spring.io/projects/spring-graphql)
+- [Spring for GraphQL Reference Documentation](https://docs.spring.io/spring-graphql/docs/1.0.0-SNAPSHOT/reference/html/)
+- [GraphQL Java](https://www.graphql-java.com/)
