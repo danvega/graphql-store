@@ -52,6 +52,7 @@ class ProductControllerTest {
 
     @Test
     void testGetAllProductsQueryReturnsAllProducts() {
+        // language=GraphQL
         String document = """
             query {
               allProducts {
@@ -73,6 +74,7 @@ class ProductControllerTest {
 
     @Test
     void testGetProductReturnsProduct() {
+        // language=GraphQL
         String document = """
             query findProduct($id:ID) {
               getProduct(id:$id) {
@@ -98,6 +100,7 @@ class ProductControllerTest {
 
     @Test
     void testCreateProduct() {
+        // language=GraphQL
         String document = """
             mutation AddProduct($input: ProductInput) {
               createProduct(input:$input) {
@@ -130,6 +133,7 @@ class ProductControllerTest {
 
     @Test
     void testUpdateProduct() {
+        // language=GraphQL
         String document = """
             mutation AddProduct($input: ProductInput) {
               updateProduct(input:$input) {
@@ -162,6 +166,7 @@ class ProductControllerTest {
 
     @Test
     void testDeleteProduct() {
+        // language=GraphQL
         String document = """
             mutation DeleteProduct($id: Int) {
               deleteProduct(id:$id)

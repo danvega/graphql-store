@@ -1,0 +1,15 @@
+{
+  "name": "Store GraphQL Schema",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "http://localhost:8080/graphql",
+        "headers": {
+          "user-agent": "Spring for GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}
