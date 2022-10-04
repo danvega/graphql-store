@@ -38,6 +38,14 @@ type Product {
     desc: String
 }
 
+type Customer {
+    id: ID!
+    firstName: String
+    lastName: String
+    email: String
+    orders: [Order]
+}
+
 type Order {
     id: ID!
     product: Product
@@ -55,13 +63,6 @@ enum OrderStatus {
     DELIVERED
 }
 
-type Customer {
-    id: ID!
-    firstName: String
-    lastName: String
-    email: String
-    orders: [Order]
-}
 
 type Review {
     id: ID!
