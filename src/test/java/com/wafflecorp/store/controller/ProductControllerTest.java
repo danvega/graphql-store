@@ -51,7 +51,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void testGetAllProductsQueryReturnsAllProducts() {
+    void shouldGetAllProductsQueryReturnsAllProducts() {
         // language=GraphQL
         String document = """
             query {
