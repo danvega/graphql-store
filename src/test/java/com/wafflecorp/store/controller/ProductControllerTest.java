@@ -73,7 +73,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void testGetProductReturnsProduct() {
+    void shouldReturnProductWithValidID() {
         // language=GraphQL
         String document = """
             query findProduct($id:ID) {
@@ -88,6 +88,21 @@ class ProductControllerTest {
         when(productRepository.findById(1)).thenReturn(java.util.Optional.ofNullable(products.get(0)));
 
         graphQlTester.document(document)
+                .variable("id",1)
+                .execute()
+                .path("getProduct")
+                .entity(Product.class)
+                .satisfies(product -> {
+                    assertEquals("Classic Waffle",product.getTitle());
+                    assertEquals("Classic Sweet Cream Waffle",product.getDesc());
+                });
+    }
+
+    @Test
+    void shouldReturnValidProductWithDocumentName() {
+        when(productRepository.findById(1)).thenReturn(java.util.Optional.ofNullable(products.get(0)));
+
+        graphQlTester.documentName("product")
                 .variable("id",1)
                 .execute()
                 .path("getProduct")
