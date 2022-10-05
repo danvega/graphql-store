@@ -21,3 +21,4 @@ In this session, you’ll learn what GraphQL is and why you should consider it i
 - [Spring for GraphQL Reference Documentation](https://docs.spring.io/spring-graphql/docs/1.0.0-SNAPSHOT/reference/html/)
 - [GraphQL Java](https://www.graphql-java.com/)
 - [Slide Deck](./SpringForGraphQL.pdf)
+- [Welcome, Spring for GraphQL by Rossen Stoyanchev @ Spring I/O 2022](https://www.youtube.com/watch?v=FMZckqbPGq0)
