@@ -1,10 +1,6 @@
 # WaffleCorp e-commerce Store
 
-This repo contains the demo code for my talk "Getting Started with Spring for GraphQL". This talk will
-be given on the SpringOne Tour this year (2022). You can find out more at the link below for a list
-of tour stops.
-
-https://tanzu.vmware.com/developer/springone-tour/ 
+This repo contains the demo code for my talk "Getting Started with Spring for GraphQL". 
 
 ## Getting Started with Spring for GraphQL
 
@@ -24,3 +20,4 @@ In this session, you’ll learn what GraphQL is and why you should consider it i
 - [Spring for GraphQL Project](https://spring.io/projects/spring-graphql)
 - [Spring for GraphQL Reference Documentation](https://docs.spring.io/spring-graphql/docs/1.0.0-SNAPSHOT/reference/html/)
 - [GraphQL Java](https://www.graphql-java.com/)
+- [Slide Deck](./SpringForGraphQL.pdf)
