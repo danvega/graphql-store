@@ -3,12 +3,10 @@ package com.wafflecorp.store.controller;
 import com.wafflecorp.store.model.Product;
 import com.wafflecorp.store.repository.ProductRepository;
 import org.springframework.graphql.data.method.annotation.Argument;
-import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Controller
