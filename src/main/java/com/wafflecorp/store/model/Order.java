@@ -1,10 +1,15 @@
 package com.wafflecorp.store.model;
 
-import javax.persistence.*;
+import jakarta.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "orders")
+@Table(name="orders")
 public class Order {
 
     @Id

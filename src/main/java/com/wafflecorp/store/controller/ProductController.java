@@ -18,7 +18,7 @@ public class ProductController {
         this.repository = repository;
     }
 
-    @SchemaMapping(typeName = "Query", value = "allProducts")
+    @QueryMapping
     public Iterable<Product> allProducts() {
         return repository.findAll();
     }

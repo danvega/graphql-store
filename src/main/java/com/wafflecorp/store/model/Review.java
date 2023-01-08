@@ -1,6 +1,9 @@
 package com.wafflecorp.store.model;
 
-import javax.persistence.*;
+import jakarta.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Review {
