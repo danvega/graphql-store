@@ -49,7 +49,7 @@
 			<artifactId>spring-boot-starter-webflux</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- comment out if you're not using M1 -->
+		<!-- remove if you're not using M1 -->
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-resolver-dns-native-macos</artifactId>
