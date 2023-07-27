@@ -1,7 +1,6 @@
 # Scalar Types
 scalar Date
 scalar DateTime
-scalar BigDecimal
 
 # Root Operations
 type Query {
@@ -17,10 +16,6 @@ type Query {
     allCustomers: [Customer]
     # Find a customer by their last name.
     findCustomerByLastName(last: String) : Customer
-    # Find all reviews in the system.
-    allReviews: [Review]
-    # Find a review by the review id.
-    getReview(id: ID) : Review
 }
 
 type Mutation {
@@ -38,13 +33,12 @@ input ProductInput {
     desc: String
 }
 
-
 type Customer {
     id: ID!
     firstName: String
     lastName: String
     email: String
-    orders: [Order]
+    orders(first:Int): [Order]
 }
 
 type Order {
