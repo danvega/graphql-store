@@ -1,16 +1,17 @@
 package com.wafflecorp.store.config;
 
-import com.wafflecorp.store.model.*;
+import com.wafflecorp.store.model.Customer;
+import com.wafflecorp.store.model.Order;
+import com.wafflecorp.store.model.OrderStatus;
+import com.wafflecorp.store.model.Product;
 import com.wafflecorp.store.repository.CustomerRepository;
 import com.wafflecorp.store.repository.OrderRepository;
 import com.wafflecorp.store.repository.ProductRepository;
-import net.datafaker.Faker;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -21,7 +22,6 @@ public class DatabaseInit implements ApplicationRunner {
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
     private final CustomerRepository customerRepository;
-    private Faker faker;
 
     public DatabaseInit(ProductRepository productRepository, OrderRepository orderRepository, CustomerRepository customerRepository) {
         this.productRepository = productRepository;
