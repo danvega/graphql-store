@@ -10,6 +10,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -44,7 +45,7 @@ public class DatabaseInit implements ApplicationRunner {
         List<Order> orders = new ArrayList<>();
         for (int i = 1; i <= 20; i++) {
             orders.add(new Order(new Random().nextInt(10),
-                    LocalDate.now(),
+                    LocalDate.now().plusDays(new Random().nextInt(30)),
                     OrderStatus.values()[new Random().nextInt(OrderStatus.values().length)],
                     products.get(new Random().nextInt(products.size()-1)),
                     dan));
