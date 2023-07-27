@@ -38,8 +38,10 @@ type Customer {
     firstName: String
     lastName: String
     email: String
-    orders(first:Int): [Order]
+    orders: [Order]
+    paginatedOrders(first: Int,last: Int, before: String,after: String): OrderConnection
 }
+
 
 type Order {
     id: ID!
