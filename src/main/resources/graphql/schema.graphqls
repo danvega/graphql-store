@@ -1,6 +1,5 @@
-# Scalar Types
+# Custom Scalar Types
 scalar Date
-scalar DateTime
 
 # Root Operations
 type Query {
