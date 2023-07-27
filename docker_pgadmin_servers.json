@@ -1,0 +1,14 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Docker Compose",
+      "Group": "Servers",
+      "Port": 5432,
+      "Username": "dvega",
+      "Host": "wafflecorp_postgres",
+      "SSLMode": "prefer",
+      "MaintenanceDB": "wafflecorp",
+      "PassFile": "/tmp/pgpassfile"
+    }
+  }
+}

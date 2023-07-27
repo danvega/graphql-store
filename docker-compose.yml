@@ -1,0 +1,41 @@
+version: '3.7'
+
+volumes:
+  postgres:
+  pgadmin:
+
+services:
+  postgres:
+    container_name: wafflecorp_postgres
+    image: 'postgres:latest'
+    environment:
+      POSTGRES_DB: wafflecorp
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - '5432'
+    restart: unless-stopped
+  pgadmin:
+    container_name: wafflecorp_pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@localhost.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_LISTEN_PORT: 5050
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+      - ./docker_pgadmin_servers.json:/pgadmin4/servers.json
+    ports:
+      - '5050:5050'
+    entrypoint:
+      - "/bin/sh"
+      - "-c"
+      - "/bin/echo 'postgres:5432:*:dvega:password' > /tmp/pgpassfile && chmod 600 /tmp/pgpassfile && /entrypoint.sh"
+  zipkin:
+    image: 'openzipkin/zipkin:latest'
+    ports:
+      - '9411'
