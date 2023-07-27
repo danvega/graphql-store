@@ -1,6 +1,7 @@
 # Scalar Types
 scalar Date
 scalar DateTime
+scalar BigDecimal
 
 # Root Operations
 type Query {
@@ -23,20 +24,20 @@ type Query {
 }
 
 type Mutation {
-    # Create a new product in the system.
-    createProduct(input: ProductInput) : Product
-    # Update an existing product in the system.
-    updateProduct(input: ProductInput) : Product
-    # Delete a product in the system.
-    deleteProduct(id: Int): Boolean
+    createProduct(product: ProductInput) : Product
 }
 
-# Objects
 type Product {
     id: ID!
     title: String
     desc: String
 }
+
+input ProductInput {
+    title: String
+    desc: String
+}
+
 
 type Customer {
     id: ID!
@@ -77,13 +78,5 @@ enum ReviewStatus {
     APPROVED
     DECLINED
 }
-
-# Inputs
-input ProductInput {
-    id: Int
-    title: String
-    desc: String
-}
-
 
 

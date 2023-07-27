@@ -1,8 +1,8 @@
 package com.wafflecorp.store.repository;
 
 import com.wafflecorp.store.model.Product;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 
-public interface ProductRepository extends CrudRepository<Product,Integer> {
+public interface ProductRepository extends ListCrudRepository<Product,Integer> {
 
 }
