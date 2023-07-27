@@ -63,20 +63,3 @@ enum OrderStatus {
     SHIPPED,
     DELIVERED
 }
-
-
-type Review {
-    id: ID!
-    content: String
-    product: Product!
-    customer: Customer!
-    status: ReviewStatus
-}
-
-enum ReviewStatus {
-    PENDING
-    APPROVED
-    DECLINED
-}
-
-
