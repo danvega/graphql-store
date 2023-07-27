@@ -40,15 +40,17 @@ public class DatabaseInit implements ApplicationRunner {
         productRepository.saveAll(products);
 
         Customer dan = new Customer("Dan","Vega","danvega@gmail.com");
-        customerRepository.save(dan);
+        var andreJohnson = new Customer("Andre", "Johnson","ajohnson@gmail.com");
+        var customers = List.of(dan,andreJohnson);
+        customerRepository.saveAll(customers);
 
         List<Order> orders = new ArrayList<>();
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 30; i++) {
             orders.add(new Order(new Random().nextInt(10),
                     LocalDate.now().plusDays(new Random().nextInt(30)),
                     OrderStatus.values()[new Random().nextInt(OrderStatus.values().length)],
-                    products.get(new Random().nextInt(products.size()-1)),
-                    dan));
+                    products.get(new Random().nextInt(products.size())),
+                    customers.get(new Random().nextInt(customers.size()))));
         }
         orderRepository.saveAll(orders);
 
