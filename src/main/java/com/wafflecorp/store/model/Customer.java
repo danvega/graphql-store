@@ -3,6 +3,10 @@ package com.wafflecorp.store.model;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.OneToMany;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Customer {
@@ -13,6 +17,8 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String email;
+    @OneToMany(mappedBy = "customer")
+    private Set<Order> orders = new HashSet<>();
 
     public Customer() {}
 

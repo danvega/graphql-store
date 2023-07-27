@@ -1,9 +1,6 @@
 package com.wafflecorp.store.model;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +12,7 @@ public class Product {
     @GeneratedValue
     private Integer id;
     private String title;
+    @Column(name = "description")
     private String desc;
     @OneToMany(mappedBy = "product")
     private Set<Order> orders = new HashSet<>();
@@ -54,6 +52,14 @@ public class Product {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 
     @Override
