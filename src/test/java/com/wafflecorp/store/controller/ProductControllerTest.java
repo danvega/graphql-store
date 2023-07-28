@@ -1,25 +1,22 @@
 package com.wafflecorp.store.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wafflecorp.store.config.GraphQlConfig;
 import com.wafflecorp.store.model.Product;
-import com.wafflecorp.store.model.ProductInput;
 import com.wafflecorp.store.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Profile;
-import org.springframework.graphql.server.WebGraphQlInterceptor;
 import org.springframework.graphql.test.tester.GraphQlTester;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -31,11 +28,10 @@ class ProductControllerTest {
 
     @Autowired
     private GraphQlTester graphQlTester;
-
     @MockBean
     private ProductRepository productRepository;
+    private List<Product> products = new ArrayList<>();
 
-    private final List<Product> products = new ArrayList<>();
 
     @Test
     public void contextLoads() {
@@ -45,11 +41,18 @@ class ProductControllerTest {
 
     @BeforeEach
     void setUp() {
-        var classic = new Product(1,"Classic Waffle", "Classic Sweet Cream Waffle");
-        var pecan = new Product(2,"Pecan Waffle", "Sweet Cream Waffle made with delicious Pecan Pieces");
-        var chocolateChip = new Product(3,"Chocolate Chip Waffle", "Sweet Cream Waffle covered in Chocolate Chips");
-        var peanutButter = new Product(4,"Peanut Butter Chip Waffle", "Sweet Cream Waffle covered in Peanut Butter Chips");
-        products.addAll(List.of(classic,pecan,chocolateChip,peanutButter));
+        if(products.isEmpty()) {
+            ObjectMapper mapper = new ObjectMapper();
+            TypeReference<List<Product>> typeReference = new TypeReference<>() {
+            };
+            InputStream inputStream = TypeReference.class.getResourceAsStream("/data/products.json");
+            try {
+                products = mapper.readValue(inputStream,typeReference);
+                System.out.println("Products loaded!");
+            } catch (IOException e){
+                System.out.println("Unable to save users: " + e.getMessage());
+            }
+        }
     }
 
     @Test
@@ -62,7 +65,7 @@ class ProductControllerTest {
                 title
                 desc
               }
-            }   
+            }
         """;
 
         when(productRepository.findAll()).thenReturn(products);
@@ -84,7 +87,7 @@ class ProductControllerTest {
                 title
                 desc
               }
-            } 
+            }
         """;
 
         when(productRepository.findById(1)).thenReturn(java.util.Optional.ofNullable(products.get(0)));

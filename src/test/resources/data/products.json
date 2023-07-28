@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "title": "Classic Waffle",
+    "desc": "Classic Sweet Cream Waffle"
+  },
+  {
+    "id": 2,
+    "title": "Pecan Waffle",
+    "desc": "Sweet Cream Waffle made with delicious Pecan Pieces"
+  },
+  {
+    "id": 3,
+    "title": "Chocolate Chip Waffle",
+    "desc": "Sweet Cream Waffle covered in Chocolate Chips"
+  },
+  {
+    "id": 4,
+    "title": "Peanut Butter Chip Waffle",
+    "desc": "Sweet Cream Waffle covered in Peanut Butter Chips"
+  }
+]
