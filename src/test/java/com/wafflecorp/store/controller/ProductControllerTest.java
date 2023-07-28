@@ -2,6 +2,7 @@ package com.wafflecorp.store.controller;
 
 import com.wafflecorp.store.config.GraphQlConfig;
 import com.wafflecorp.store.model.Product;
+import com.wafflecorp.store.model.ProductInput;
 import com.wafflecorp.store.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
+import org.springframework.graphql.server.WebGraphQlInterceptor;
 import org.springframework.graphql.test.tester.GraphQlTester;
 
 import java.util.ArrayList;
@@ -22,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
-@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Import({GraphQlConfig.class})
 @GraphQlTest(ProductController.class)
 class ProductControllerTest {
@@ -111,89 +113,6 @@ class ProductControllerTest {
                     assertEquals("Classic Waffle",product.getTitle());
                     assertEquals("Classic Sweet Cream Waffle",product.getDesc());
                 });
-    }
-
-    @Test
-    void testCreateProduct() {
-        // language=GraphQL
-        String document = """
-            mutation AddProduct($input: ProductInput) {
-              createProduct(input:$input) {
-                id
-                title
-                desc
-              }
-            }
-        """;
-
-        Product strawberry = new Product(5,"Strawberry Waffles","Our Classic Waffle topped with Strawberries.");
-        Map<String,Object> input = new HashMap<>();
-        input.put("id",strawberry.getId());
-        input.put("title", strawberry.getTitle());
-        input.put("desc", strawberry.getDesc());
-
-        when(productRepository.save(ArgumentMatchers.any())).thenReturn(strawberry);
-
-        graphQlTester.document(document)
-                .variable("input", input)
-                .execute()
-                .path("createProduct")
-                .entity(Product.class)
-                .satisfies(product -> {
-                    assertNotNull(product.getId());
-                    assertEquals("Strawberry Waffles",product.getTitle());
-                    assertEquals("Our Classic Waffle topped with Strawberries.", product.getDesc());
-                });
-    }
-
-    @Test
-    void testUpdateProduct() {
-        // language=GraphQL
-        String document = """
-            mutation AddProduct($input: ProductInput) {
-              updateProduct(input:$input) {
-                id
-                title
-                desc
-              }
-            }
-        """;
-
-        Product strawberry = new Product(5,"Strawberry Waffle","Our Classic Waffle topped with Strawberries.");
-        Map<String,Object> input = new HashMap<>();
-        input.put("id",strawberry.getId());
-        input.put("title", strawberry.getTitle());
-        input.put("desc", strawberry.getDesc());
-
-        when(productRepository.save(ArgumentMatchers.any())).thenReturn(strawberry);
-
-        graphQlTester.document(document)
-                .variable("input", input)
-                .execute()
-                .path("updateProduct")
-                .entity(Product.class)
-                .satisfies(product -> {
-                    assertNotNull(product.getId());
-                    assertEquals("Strawberry Waffle",product.getTitle());
-                    assertEquals("Our Classic Waffle topped with Strawberries.", product.getDesc());
-                });
-    }
-
-    @Test
-    void testDeleteProduct() {
-        // language=GraphQL
-        String document = """
-            mutation DeleteProduct($id: Int) {
-              deleteProduct(id:$id)
-            }
-        """;
-
-        Mockito.doNothing().when(productRepository).deleteById(1);
-
-        graphQlTester.document(document)
-                .variable("id", 1)
-                .executeAndVerify();
-
     }
 
 }

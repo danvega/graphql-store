@@ -60,6 +60,14 @@ public class Customer {
         this.email = email;
     }
 
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +

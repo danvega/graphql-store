@@ -1,9 +1,10 @@
 package com.wafflecorp.store.controller;
 
 import com.wafflecorp.store.model.Order;
-import com.wafflecorp.store.model.OrderStatus;
+import com.wafflecorp.store.repository.OrderRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.graphql.test.tester.HttpGraphQlTester;
@@ -12,13 +13,13 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-/**
- * An example of using HttpGraphQlTester
- */
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class OrderControllerIntTest {
 
     private HttpGraphQlTester graphQlTester;
+    @Autowired
+    private OrderRepository orderRepository;
 
     @LocalServerPort
     int port;
@@ -26,6 +27,7 @@ class OrderControllerIntTest {
     @BeforeEach
     void setUp() {
         WebTestClient client = WebTestClient.bindToServer()
+                .defaultHeader("Authorization","Basic dXNlcjpwYXNzd29yZA==")
                 .baseUrl(String.format("http://localhost:%s/graphql", port))
                 .build();
 
@@ -39,44 +41,58 @@ class OrderControllerIntTest {
 
     @Test
     void shouldRespondWithAllOrders() {
-        String document = """
-            query {
-                allOrders {
-                    id
-                    qty
-                    status
-                }
-            }        
+        var document = """
+        query {
+            allOrders {
+                id
+                qty
+                status
+            }
+        }        
         """;
 
         graphQlTester.document(document)
                 .execute()
                 .path("allOrders")
                 .entityList(Order.class)
-                .hasSize(1);
+                .hasSize(orderRepository.findAll().size());
     }
 
     @Test
     void shouldGetSingleOrder() {
+        Order o = orderRepository.findAll().stream().findFirst().get();
+
         String document = """
-            query findOrderById($id: ID){
-              getOrder(id: $id){
+            query findOrderById($id: ID) {
+              getOrder(id: $id) {
                 id
                 qty
                 status
+                orderedOn
+                product {
+                  title
+                }
+                customer {
+                  firstName
+                  lastName
+                  email
+                }
               }
             }
         """;
 
         graphQlTester.document(document)
-                .variable("id",6)
+                .variable("id",o.getId())
                 .execute()
                 .path("getOrder")
                 .entity(Order.class)
                 .satisfies(order -> {
-                    assertNotNull(order.getId());
-                    assertEquals(1,order.getQty());
-                    assertEquals(OrderStatus.PENDING,order.getStatus());
+                    assertEquals(o.getId(),order.getId());
+                    assertEquals(o.getQty(),order.getQty());
+                    assertEquals(o.getStatus(),order.getStatus());
+                    assertEquals(o.getOrderedOn(),order.getOrderedOn());
+                    assertEquals(o.getProduct().getTitle(),order.getProduct().getTitle());
+                    assertEquals(o.getCustomer().getEmail(),order.getCustomer().getEmail());
                 });
     }
 

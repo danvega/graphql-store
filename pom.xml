@@ -71,6 +71,7 @@
 			<artifactId>spring-boot-starter-webflux</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<!-- remove if you're not using M1 -->
 		<dependency>
 			<groupId>io.netty</groupId>
@@ -79,10 +80,30 @@
 			<scope>test</scope>
 			<classifier>osx-aarch_64</classifier>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-testcontainers</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.graphql</groupId>
 			<artifactId>spring-graphql-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
 		</dependency>
 	</dependencies>
 
