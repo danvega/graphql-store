@@ -42,16 +42,7 @@ class ProductControllerTest {
     @BeforeEach
     void setUp() {
         if(products.isEmpty()) {
-            ObjectMapper mapper = new ObjectMapper();
-            TypeReference<List<Product>> typeReference = new TypeReference<>() {
-            };
-            InputStream inputStream = TypeReference.class.getResourceAsStream("/data/products.json");
-            try {
-                products = mapper.readValue(inputStream,typeReference);
-                System.out.println("Products loaded!");
-            } catch (IOException e){
-                System.out.println("Unable to save users: " + e.getMessage());
-            }
+            loadProducts();
         }
     }
 
@@ -116,6 +107,19 @@ class ProductControllerTest {
                     assertEquals("Classic Waffle",product.getTitle());
                     assertEquals("Classic Sweet Cream Waffle",product.getDesc());
                 });
+    }
+
+    private void loadProducts() {
+        ObjectMapper mapper = new ObjectMapper();
+        TypeReference<List<Product>> typeReference = new TypeReference<>() {
+        };
+        InputStream inputStream = TypeReference.class.getResourceAsStream("/data/products.json");
+        try {
+            products = mapper.readValue(inputStream,typeReference);
+            System.out.println("Products loaded!");
+        } catch (IOException e){
+            System.out.println("Unable to save users: " + e.getMessage());
+        }
     }
 
 }
