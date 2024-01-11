@@ -1,5 +1,6 @@
 package com.wafflecorp.store.controller;
 
+import com.wafflecorp.store.exception.ProductNotFoundException;
 import com.wafflecorp.store.model.Product;
 import com.wafflecorp.store.model.ProductInput;
 import com.wafflecorp.store.repository.ProductRepository;
@@ -34,7 +35,7 @@ public class ProductController {
 
     @QueryMapping
     public Optional<Product> getProduct(@Argument Integer id) {
-        return repository.findById(id);
+        return Optional.ofNullable(repository.findById(id).orElseThrow(ProductNotFoundException::new));
     }
 
     @Secured("ROLE_ADMIN")
