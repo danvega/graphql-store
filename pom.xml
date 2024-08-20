@@ -72,7 +72,7 @@
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-resolver-dns-native-macos</artifactId>
-			<version>4.1.86.Final</version>
+			<version>4.1.112.Final</version>
 			<scope>test</scope>
 			<classifier>osx-aarch_64</classifier>
 		</dependency>
@@ -127,6 +127,11 @@
 			<releases>
 				<enabled>false</enabled>
 			</releases>
+		</repository>
+		<repository>
+			<id>maven_central</id>
+			<name>Maven Central</name>
+			<url>https://repo.maven.apache.org/maven2/</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
