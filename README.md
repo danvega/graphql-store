@@ -18,6 +18,28 @@ There are a few things you need to know about this application to get it up and 
 desktop running to run the application as is. This is because the application uses the Docker Compose Module and will start
 any services located in `docker-compose.yml` automatically. If you don't want to use Docker you could remove that module and then configure each of those services manually.
 
+
+## Queries 
+
+```graphql
+query search {
+  search(text: "Waffle") {
+    __typename
+    ... on Customer {
+      id
+      firstName
+      lastName
+      email
+    }
+    ... on Product {
+      id
+      title
+      desc
+    }
+  }
+}
+```
+
 ## Resources
 
 - [Learn GraphQL](https://graphql.org/learn/)

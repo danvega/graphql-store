@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 @Import(RestClientAutoConfiguration.class)
 public class ClientApp implements ApplicationRunner {
 
-    private static final Logger logger = LoggerFactory.getLogger(ClientApp.class);
+    private static final Logger log = LoggerFactory.getLogger(ClientApp.class);
     private final HttpSyncGraphQlClient client;
 
     public ClientApp(RestClient.Builder builder) {
@@ -32,15 +32,15 @@ public class ClientApp implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        logger.info("Synchronously Retrieving Products ========================");
+        log.info("Synchronously Retrieving Products ========================");
         Product product = client.documentName("product")
                 .variable("id", 1)
                 .retrieveSync("getProduct")
                 .toEntity(Product.class);
-        logger.info("Product {}",product);
+        log.info("Product {}",product);
 
 
-        logger.info("Asynchronously Retrieving Products ========================");
+        log.info("Asynchronously Retrieving Products ========================");
         Mono<Product> p2 = client.documentName("product")
                 .variable("id", 2)
                 .retrieve("getProduct")

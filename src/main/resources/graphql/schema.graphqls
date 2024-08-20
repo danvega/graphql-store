@@ -15,11 +15,18 @@ type Query {
     allCustomers: [Customer]
     # Find a customer by their last name.
     findCustomerByLastName(last: String) : Customer
+    # Search for Products or Customers
+    search(text: String): [SearchItem!]!
+    # Reviews
+    allProductReviews: [ProductReview]
+    allOrderReviews: [OrderReview]
 }
 
 type Mutation {
     createProduct(product: ProductInput) : Product
 }
+
+union SearchItem = Product | Customer
 
 type Product {
     id: ID!
@@ -57,4 +64,29 @@ enum OrderStatus {
     ORDERED,
     SHIPPED,
     DELIVERED
+}
+
+# Reviews
+
+interface Review {
+    id: ID!
+    title: String
+    body: String
+    rating: Int
+}
+
+type ProductReview implements Review {
+    id: ID!
+    title: String
+    body: String
+    rating: Int
+    product: Product
+}
+
+type OrderReview implements Review {
+    id: ID!
+    title: String
+    body: String
+    rating: Int
+    order: Order
 }
