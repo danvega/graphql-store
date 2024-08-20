@@ -1,15 +1,15 @@
 # WaffleCorp e-commerce Store
 
 This repo contains the demo code for my talk "Getting Started with Spring for GraphQL". This project is built with
-Spring Boot 3.2 M1 and the following dependencies: 
+Spring Boot 3.3.3 and the following dependencies: 
 
 - Spring Web
 - Spring for GraphQL
 - Spring Data JPA
-- Spring Security 
 - Spring Boot Docker Compose
 - PostgreSQL
-- Spring Boot Actuator 
+- Spring Boot Actuator
+- Spring Security (Optional)
 - More...
 
 ## Running the application
