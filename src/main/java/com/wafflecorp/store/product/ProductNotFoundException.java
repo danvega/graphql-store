@@ -1,4 +1,4 @@
-package com.wafflecorp.store.exception;
+package com.wafflecorp.store.product;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

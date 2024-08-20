@@ -1,5 +1,7 @@
-package com.wafflecorp.store.model;
+package com.wafflecorp.store.order;
 
+import com.wafflecorp.store.customer.Customer;
+import com.wafflecorp.store.product.Product;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

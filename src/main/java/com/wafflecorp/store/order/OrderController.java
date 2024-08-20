@@ -1,7 +1,5 @@
-package com.wafflecorp.store.controller;
+package com.wafflecorp.store.order;
 
-import com.wafflecorp.store.model.Order;
-import com.wafflecorp.store.repository.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.graphql.data.method.annotation.Argument;

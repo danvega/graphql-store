@@ -1,7 +1,5 @@
-package com.wafflecorp.store.service;
+package com.wafflecorp.store.product;
 
-import com.wafflecorp.store.model.Product;
-import com.wafflecorp.store.repository.ProductRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 

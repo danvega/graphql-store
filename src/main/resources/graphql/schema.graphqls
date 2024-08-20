@@ -25,6 +25,7 @@ type Product {
     id: ID!
     title: String
     desc: String
+    orders: [Order]
 }
 
 input ProductInput {
@@ -40,7 +41,6 @@ type Customer {
     orders: [Order]
     paginatedOrders(first: Int,last: Int, before: String,after: String): OrderConnection
 }
-
 
 type Order {
     id: ID!

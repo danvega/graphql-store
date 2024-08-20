@@ -1,5 +1,6 @@
-package com.wafflecorp.store.model;
+package com.wafflecorp.store.customer;
 
+import com.wafflecorp.store.order.Order;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

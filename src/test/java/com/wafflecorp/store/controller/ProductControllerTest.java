@@ -2,9 +2,10 @@ package com.wafflecorp.store.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wafflecorp.store.config.GraphQlConfig;
-import com.wafflecorp.store.model.Product;
-import com.wafflecorp.store.repository.ProductRepository;
+import com.wafflecorp.store.GraphQlConfig;
+import com.wafflecorp.store.product.Product;
+import com.wafflecorp.store.product.ProductController;
+import com.wafflecorp.store.product.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

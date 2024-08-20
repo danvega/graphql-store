@@ -1,7 +1,6 @@
-package com.wafflecorp.store.repository;
+package com.wafflecorp.store.order;
 
-import com.wafflecorp.store.model.Customer;
-import com.wafflecorp.store.model.Order;
+import com.wafflecorp.store.customer.Customer;
 import org.springframework.data.domain.Limit;
 import org.springframework.data.domain.ScrollPosition;
 import org.springframework.data.domain.Sort;
@@ -16,4 +15,5 @@ public interface OrderRepository extends ListCrudRepository<Order,Integer> {
 
     Window<Order> findByCustomer(Customer customer, ScrollPosition position, Limit limit, Sort sort);
 
+    List<Order> findAllByProductId(Integer id);
 }

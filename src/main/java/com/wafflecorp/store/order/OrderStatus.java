@@ -1,4 +1,4 @@
-package com.wafflecorp.store.model;
+package com.wafflecorp.store.order;
 
 public enum OrderStatus {
     CANCELED,

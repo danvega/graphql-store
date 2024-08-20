@@ -1,15 +1,12 @@
-package com.wafflecorp.store.controller;
+package com.wafflecorp.store.customer;
 
-import com.wafflecorp.store.model.Customer;
-import com.wafflecorp.store.model.Order;
-import com.wafflecorp.store.repository.CustomerRepository;
-import com.wafflecorp.store.repository.OrderRepository;
+import com.wafflecorp.store.order.Order;
+import com.wafflecorp.store.order.OrderRepository;
 import org.springframework.data.domain.Limit;
 import org.springframework.data.domain.ScrollPosition;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Window;
 import org.springframework.graphql.data.method.annotation.Argument;
-import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.graphql.data.query.ScrollSubrange;
