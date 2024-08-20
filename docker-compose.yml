@@ -15,7 +15,7 @@ services:
     volumes:
       - postgres:/data/postgres
     ports:
-      - '5432'
+      - '5432:5432'
     restart: unless-stopped
   pgadmin:
     container_name: wafflecorp_pgadmin

@@ -19,9 +19,4 @@ public class GraphQlConfig {
                 .scalar(ExtendedScalars.Date);
     }
 
-    @Bean
-    GraphQlSourceBuilderCustomizer inspectionCustomizer() {
-        return source -> source.inspectSchemaMappings(report -> log.info(report.toString()));
-    }
-
 }
