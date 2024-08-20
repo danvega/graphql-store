@@ -1,0 +1,7 @@
+query findById($id:ID) {
+    getProduct(id:$id){
+        id
+        title
+        desc
+    }
+}
