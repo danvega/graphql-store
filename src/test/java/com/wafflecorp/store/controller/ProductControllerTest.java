@@ -2,7 +2,6 @@ package com.wafflecorp.store.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wafflecorp.store.GraphQlConfig;
 import com.wafflecorp.store.product.Product;
 import com.wafflecorp.store.product.ProductController;
 import com.wafflecorp.store.product.ProductRepository;
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.graphql.test.tester.GraphQlTester;
 
 import java.io.IOException;
@@ -23,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
-@Import({GraphQlConfig.class})
 @GraphQlTest(ProductController.class)
 class ProductControllerTest {
 
