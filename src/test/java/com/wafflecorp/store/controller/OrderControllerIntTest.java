@@ -41,17 +41,7 @@ class OrderControllerIntTest {
 
     @Test
     void shouldRespondWithAllOrders() {
-        var document = """
-        query {
-            allOrders {
-                id
-                qty
-                status
-            }
-        }        
-        """;
-
-        graphQlTester.document(document)
+        graphQlTester.documentName("orders")
                 .execute()
                 .path("allOrders")
                 .entityList(Order.class)
