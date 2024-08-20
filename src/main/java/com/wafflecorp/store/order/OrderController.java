@@ -20,9 +20,12 @@ public class OrderController {
         this.repository = repository;
     }
 
+    /*
+     You could ask for only the authenticated principal if spring security is on the classpath
+     allOrders(Principal principal)
+     */
     @QueryMapping
-    public List<Order> allOrders(Principal principal) {
-        log.info("Authenticated Principal: " + principal);
+    public List<Order> allOrders() {
         return repository.findAll();
     }
 

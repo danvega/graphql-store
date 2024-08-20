@@ -15,18 +15,18 @@ public class ProductController {
 
     private final ProductRepository repository;
     private final OrderRepository orderRepository;
+    private final ProductService productService;
 
-    public ProductController(ProductRepository repository, OrderRepository orderRepository) {
+    public ProductController(ProductRepository repository, OrderRepository orderRepository, ProductService productService) {
         this.repository = repository;
         this.orderRepository = orderRepository;
+        this.productService = productService;
     }
 
     @QueryMapping
     public List<Product> allProducts() {
         return repository.findAll();
     }
-
-
 
     @QueryMapping
     public Optional<Product> getProduct(@Argument Integer id) {
@@ -36,9 +36,8 @@ public class ProductController {
     @Secured("ROLE_ADMIN")
     @MutationMapping
     public Product createProduct(@Argument ProductInput productInput) {
-        return repository.save(new Product(productInput.title(), productInput.desc()));
+        return productService.create(new Product(productInput.title(), productInput.desc()));
     }
-
 
 //    @SchemaMapping
 //    public List<Order> orders(Product product) {

@@ -2,14 +2,18 @@ package com.wafflecorp.store.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wafflecorp.store.order.OrderRepository;
 import com.wafflecorp.store.product.Product;
 import com.wafflecorp.store.product.ProductController;
 import com.wafflecorp.store.product.ProductRepository;
+import com.wafflecorp.store.product.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.graphql.test.tester.GraphQlTester;
 
 import java.io.IOException;
@@ -25,16 +29,26 @@ import static org.mockito.Mockito.when;
 class ProductControllerTest {
 
     @Autowired
-    private GraphQlTester graphQlTester;
+    GraphQlTester graphQlTester;
+
     @MockBean
-    private ProductRepository productRepository;
-    private List<Product> products = new ArrayList<>();
+    ProductRepository productRepository;
+
+    @MockBean
+    OrderRepository orderRepository;
+
+    @MockBean
+    ProductService productService;
+
+    List<Product> products = new ArrayList<>();
 
 
     @Test
     public void contextLoads() {
         assertNotNull(graphQlTester);
         assertNotNull(productRepository);
+        assertNotNull(orderRepository);
+        assertNotNull(productService);
     }
 
     @BeforeEach

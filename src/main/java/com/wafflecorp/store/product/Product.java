@@ -1,6 +1,10 @@
 package com.wafflecorp.store.product;
 
+import com.wafflecorp.store.order.Order;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -11,8 +15,8 @@ public class Product {
     private String title;
     @Column(name = "description")
     private String desc;
-//    @OneToMany(mappedBy = "product")
-//    private Set<Order> orders = new HashSet<>();
+    @OneToMany(mappedBy = "product")
+    private Set<Order> orders = new HashSet<>();
 
     public Product() {}
 
@@ -51,13 +55,13 @@ public class Product {
         this.desc = desc;
     }
 
-//    public Set<Order> getOrders() {
-//        return orders;
-//    }
-//
-//    public void setOrders(Set<Order> orders) {
-//        this.orders = orders;
-//    }
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
 
     @Override
     public String toString() {
