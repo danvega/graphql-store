@@ -81,7 +81,8 @@ go through in the demo:
 - Explore the Starting Code
     - Schema
     - Controllers are empty to start
-- Run the application schema mapping inspection report
+- Run the application schema mapping inspection report 
+- How much of the app are we going to build? 
 
 ## Resources
 
