@@ -33,8 +33,8 @@ public class ProductController {
     }
 
     @MutationMapping
-    public Product createProduct(@Argument ProductInput productInput) {
-        return productRepository.save(new Product(productInput.title(), productInput.desc()));
+    public Product createProduct(@Argument ProductInput product) {
+        return productRepository.save(new Product(product.title(), product.desc()));
     }
 
     @SchemaMapping

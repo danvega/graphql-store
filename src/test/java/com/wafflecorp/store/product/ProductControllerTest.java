@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @GraphQlTest(ProductController.class)
@@ -31,9 +32,6 @@ class ProductControllerTest {
     @MockBean
     OrderRepository orderRepository;
 
-    @MockBean
-    ProductService productService;
-
     List<Product> products = new ArrayList<>();
 
 
@@ -42,7 +40,6 @@ class ProductControllerTest {
         assertNotNull(graphQlTester);
         assertNotNull(productRepository);
         assertNotNull(orderRepository);
-        assertNotNull(productService);
     }
 
     @BeforeEach
@@ -115,10 +112,24 @@ class ProductControllerTest {
                 });
     }
 
+    @Test
+    void shouldCreateNewProduct() {
+        when(productRepository.save(any(Product.class))).thenReturn(products.get(0));
+
+        graphQlTester.documentName("createProduct")
+                .variable("title","New Waffle TITLE")
+                .variable("desc","New Waffle DESC")
+                .execute()
+                .path("createProduct")
+                .entity(Product.class)
+                .satisfies(product -> {
+                    assertNotNull(product.getId());
+                });
+    }
+
     private void loadProducts() {
         ObjectMapper mapper = new ObjectMapper();
-        TypeReference<List<Product>> typeReference = new TypeReference<>() {
-        };
+        TypeReference<List<Product>> typeReference = new TypeReference<>() {};
         InputStream inputStream = TypeReference.class.getResourceAsStream("/data/products.json");
         try {
             products = mapper.readValue(inputStream,typeReference);

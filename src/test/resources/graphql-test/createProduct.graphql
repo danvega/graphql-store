@@ -1,0 +1,7 @@
+mutation createProduct($title: String, $desc: String) {
+    createProduct(product: {title:$title,desc:$desc}) {
+        id
+        title
+        desc
+    }
+}
