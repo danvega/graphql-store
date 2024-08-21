@@ -37,7 +37,7 @@ public class ProductClient {
         Mono.zip(p2, p3, p4).doOnNext(System.out::println).block();
     }
 
-    public Mono<Product> retrieveProductAsync(int id) {
+    private Mono<Product> retrieveProductAsync(int id) {
         return client.documentName("product")
                 .variable("id", id)
                 .retrieve("getProduct")
