@@ -1,7 +1,5 @@
-package com.wafflecorp.store.controller;
+package com.wafflecorp.store.product;
 
-import com.wafflecorp.store.product.Product;
-import com.wafflecorp.store.product.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureHttpGraphQlTester;

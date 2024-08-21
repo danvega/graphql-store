@@ -1,19 +1,13 @@
-package com.wafflecorp.store.controller;
+package com.wafflecorp.store.product;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wafflecorp.store.order.OrderRepository;
-import com.wafflecorp.store.product.Product;
-import com.wafflecorp.store.product.ProductController;
-import com.wafflecorp.store.product.ProductRepository;
-import com.wafflecorp.store.product.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.graphql.test.tester.GraphQlTester;
 
 import java.io.IOException;

@@ -1,7 +1,5 @@
-package com.wafflecorp.store.controller;
+package com.wafflecorp.store.order;
 
-import com.wafflecorp.store.order.Order;
-import com.wafflecorp.store.order.OrderRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
