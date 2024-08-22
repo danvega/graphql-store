@@ -79,10 +79,31 @@ go through in the demo:
 
 - http://start.spring.io
 - Explore the Starting Code
-    - Schema
-    - Controllers are empty to start
+    - Walk through `src/main/resources/graphql/schema.graphqls`
+    - Product Controller is empty to start
 - Run the application schema mapping inspection report 
-- How much of the app are we going to build? 
+- How much of the app are we going to build?
+  - ProductController
+    - allProducts 
+      - `@SchemaMapping` & `@QueryMapping`
+    - getProduct
+      - @Argument
+    - [Method Arguments](https://docs.spring.io/spring-graphql/reference/controllers.html#controllers.schema-mapping.signature)
+    - createProduct `@MutationMapping` 
+      - Validation
+    - orders `@SchemaMapping`
+      - Talk about difference between field and data fetcher / Registering Data Fetchers
+      - orders could come from a microservice
+  - Client App
+  - Testing
+  - Features (We won't get to cover all of these)
+    - Unions
+    - Interfaces
+    - Batch Mapping
+    - Defer
+    - Federation
+    - Virtual Threads
+
 
 ## Resources
 

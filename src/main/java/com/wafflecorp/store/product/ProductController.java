@@ -22,24 +22,5 @@ public class ProductController {
         this.orderRepository = orderRepository;
     }
 
-    @QueryMapping
-    public List<Product> allProducts() {
-        return productRepository.findAll();
-    }
-
-    @QueryMapping
-    public Optional<Product> getProduct(@Argument Integer id) {
-        return Optional.ofNullable(productRepository.findById(id).orElseThrow(ProductNotFoundException::new));
-    }
-
-    @MutationMapping
-    public Product createProduct(@Argument ProductInput product) {
-        return productRepository.save(new Product(product.title(), product.desc()));
-    }
-
-    @SchemaMapping
-    public List<Order> orders(Product product) {
-        return orderRepository.findAllByProductId(product.getId());
-    }
 
 }
