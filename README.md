@@ -86,6 +86,8 @@ go through in the demo:
   - ProductController
     - allProducts 
       - `@SchemaMapping` & `@QueryMapping`
+      - method name doesn't match field ~ Cannot find GraphQL Schema
+      - `QueryMapping("products")`
     - getProduct
       - @Argument
     - [Method Arguments](https://docs.spring.io/spring-graphql/reference/controllers.html#controllers.schema-mapping.signature)
