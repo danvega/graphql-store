@@ -105,6 +105,8 @@ go through in the demo:
     - Defer
     - Federation
     - Virtual Threads
+      - All of this is happening sequentially on the same Tomcat thread
+      - Too many controller method invocations (n+1)
 
 
 ## Resources
