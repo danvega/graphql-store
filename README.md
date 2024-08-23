@@ -81,6 +81,7 @@ go through in the demo:
 - Explore the Starting Code
     - Walk through `src/main/resources/graphql/schema.graphqls`
     - Product Controller is empty to start
+    - Clear out GraphiQL UI
 - Run the application schema mapping inspection report 
 - How much of the app are we going to build?
   - ProductController
